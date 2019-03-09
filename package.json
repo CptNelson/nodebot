@@ -1,0 +1,14 @@
+{
+  "name": "ilmatar",
+  "version": "0.0.1",
+  "description": "an ircbot made with nodejs and coffea",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "coffea": "^0.4.29"
+  }
+}
