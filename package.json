@@ -6,9 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "myrrys",
   "license": "ISC",
   "dependencies": {
-    "coffea": "^0.4.29"
+    "coffea": "^0.4.29",
+    "get-title-at-url": "^1.1.6",
+    "request": "^2.88.0",
+    "valid-url": "^1.0.9"
   }
 }
