@@ -1,10 +1,7 @@
 'use strict';
 
 const request = require('request');
-const getTitle = require('get-title-at-url');
-const validUrl = require('valid-url');
-let weatherMessage;
-
+const articleTitle = require('article-title');
 
 let client = require('coffea')({
     host: 'open.ircnet.net',
@@ -28,12 +25,16 @@ client.on('command', function (event) {
 
         // dice roller.
         case 'roll':
-            if (event.args.length < 1 || !isInt(event.args[0] || !isInt(event.args[1]))) {
-                event.reply('Try again. Syntax is: !roll 1 6')
+            if (event.args.length < 1 || !isInt(event.args[0]) || !isInt(event.args[1])) {
+                event.reply('Try again. You need to give amount of dices and number of their sides.(Syntax: !roll 1 6)');
                 break;
             }  
             let roll = rollDice(event.args[0], event.args[1]);
             event.reply('You rolled ' + event.args[0] + "D" + event.args[1] + " and the result is: " + roll.toString() + '!');
+            if (roll == 666)
+                event.reply('SAATANA!');
+            if (roll == 420)
+                event.reply('https://www.youtube.com/watch?v=hIw7oeZKpZc');
             break;
             
         // weather request
@@ -66,17 +67,35 @@ client.on('command', function (event) {
     console.log(event.channel.name, event.user.nick, event.message);
 });
 
-
+// the bot reads messages send on channel, runs functions according to them.
 client.on('message', function (event) {
-    if (validUrl.isUri(event.message)){
-        console.log('Looks like an URI');
-        getTitle(event.message, function(title){
-            event.reply("Title: " + title);
-          });
-    } else {
-        return;
+    if (event.message.includes("ilmatar"))
+        event.reply("häh?");
+    else if (checkForUrl(event.message)) {
+        console.log(event.message);
+
+    request(event.message, { json: true }, (err, res, body) => {
+    if (err) { return console.log(err); }
+    console.log(body.url);
+    console.log(body.explanation);
+        event.reply('Title: ' + articleTitle(body));
+        });
+
     }
+
+
 });
+
+function checkForUrl(str) {
+    let pattern = new RegExp('^((ft|htt)ps?:\\/\\/)?'+ // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name and extension
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+  '(\\:\\d+)?'+ // port
+  '(\\/[-a-z\\d%@_.~+&:]*)*'+ // path
+  '(\\?[;&a-z\\d%@_.,~+&:=-]*)?'+ // query string
+  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return pattern.test(str);
+}
 
 // gives out a random number defined by amount of dices and their sides.
 function rollDice(dices, sides)

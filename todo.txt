@@ -1,0 +1,16 @@
+Instagram og:video og:image grab
+search display_url in source for multiple images
+facebook www to mbasic to video/image source
+!sää ääkköset search
+ 
+!roll 04SAATANA! <- red color
+420 to BLAZE IT!
+X Try again. Syntax is: !roll 1 6 -> explain somehow first is number of rolls, second sides on die X
+ 
+urlgrab - : cut title
+urlgrab http://: breaks
+urlgrab link after text no url
+urlgrab title contains http:// breaks
+urlgrab about:config breaks
+ 
+Avaruuskaveri message and return function
