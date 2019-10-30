@@ -9,7 +9,7 @@ let client = require('coffea')({
     ssl: false, // set to true if you want to use ssl
     ssl_allow_invalid: false, // set to true if the server has a custom ssl certificate
     prefix: '!', // used to parse commands and emit on('command') events, default: !
-    channels: ['#noitapiiri'], // autojoin channels, default: []
+    channels: [], // autojoin channels, default: []
     nick: 'ilmatar', // default value: 'coffea' with random number
     username: 'ilmatar', // default value: username = nick
     realname: 'ilmatar', // default value: realname = nick
@@ -44,7 +44,7 @@ client.on('command', function (event) {
                 event.reply("unohdit määritellä paikkakunnan. (syntaksi: !sää kivesjärvi)");
                 break;
             } 
-            let apiKey = 'a44d12f21b5115f1d861ff50b4eea477'
+            let apiKey = '***********************'
             let url = `http://api.openweathermap.org/data/2.5/weather?q=${event.args[0]}&units=metric&appid=${apiKey}`
 
             request(url, function (err, response, body) {
